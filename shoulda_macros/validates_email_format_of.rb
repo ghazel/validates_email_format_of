@@ -90,6 +90,15 @@ module ValidatesEmailFormatOf
           "#{'a' * 65}@example.com",
           "test@#{'a'*252}.com")
       end
+
+      context 'invalid emails with undescore in domain part' do
+        should_not_allow_values(klass,
+            'invalid@exa_mple.com',
+            'invalid@te_st.example.com',
+            'invalid@test.exa_mple.com',
+            'invalid@test.example.co_m',
+            'invalid@test.example.co.u_k')
+      end
     end
   end
 end
